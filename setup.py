@@ -5,7 +5,8 @@ from setuptools import setup, find_packages
 
 
 def read(*parts):
-    return codecs.open(os.path.join(os.path.dirname(__file__), *parts)).read()
+    data = codecs.open(os.path.join(os.path.dirname(__file__), *parts)).read()
+    return data.decode('utf-8')
 
 
 def find_version(*file_paths):
