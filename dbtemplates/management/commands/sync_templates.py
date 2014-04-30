@@ -5,6 +5,7 @@ from optparse import make_option
 from django.contrib.sites.models import Site
 from django.core.management.base import CommandError, NoArgsCommand
 from django.template.loaders.app_directories import app_template_dirs
+from django.utils.six import moves
 
 from dbtemplates.conf import settings
 from dbtemplates.models import Template
@@ -73,7 +74,7 @@ class Command(NoArgsCommand):
                         t = Template.on_site.get(name__exact=name)
                     except Template.DoesNotExist:
                         if not force:
-                            confirm = raw_input(
+                            confirm = moves.input(
                                 "\nA '%s' template doesn't exist in the "
                                 "database.\nCreate it with '%s'?"
                                 " (y/[n]): """ % (name, path))
@@ -85,7 +86,7 @@ class Command(NoArgsCommand):
                     else:
                         while 1:
                             if overwrite == ALWAYS_ASK:
-                                confirm = raw_input(
+                                confirm = moves.input(
                                     "\n%(template)s exists in the database.\n"
                                     "(1) Overwrite %(template)s with '%(path)s'\n"
                                     "(2) Overwrite '%(path)s' with %(template)s\n"
